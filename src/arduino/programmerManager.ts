@@ -4,7 +4,7 @@ import * as vscode from "vscode";
 import * as constants from "../common/constants";
 import * as util from "../common/util";
 import { DeviceContext } from "../deviceContext";
-import { SerialMonitor } from "../serialmonitor/serialMonitor"
+import { SerialMonitor } from "../serialmonitor/serialMonitor";
 import { ArduinoApp } from "./arduino";
 import { IArduinoSettings } from "./arduinoSettings";
 
@@ -27,7 +27,6 @@ export class ProgrammerManager {
         this._programmerStatusBar.text = "<Select Programmer>";
         this._programmerStatusBar.show();
 
-        
         this._uploadPortsStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, constants.statusBarPriority.PROGRAMMER);
         this._uploadPortsStatusBar.command = "arduino.selectUploadSerialPort";
         this._uploadPortsStatusBar.tooltip = "Select Upload Port";
@@ -66,6 +65,14 @@ export class ProgrammerManager {
         dc.programmer = this._currentProgrammerName;
     }
 
+    public async selectUploadSerialPort(vid: string, pid: string) {
+        const serialMonitor = SerialMonitor.getInstance();
+
+        serialMonitor.selectSerialPortGeneric(vid, pid, (name: string) => {
+            this.updateUploadPortListStatus(name);
+        });
+    }
+
     private loadProgrammers() {
         this._programmers = new Map<string, string>();
         const boardLineRegex = /([^\.]+)\.(\S+)=(.+)/;
@@ -96,14 +103,6 @@ export class ProgrammerManager {
                 });
             }
         }));
-    }
-    
-    public async selectUploadSerialPort(vid: string, pid: string) {
-        const serialMonitor = SerialMonitor.getInstance();
-
-        serialMonitor.selectSerialPortGeneric(vid, pid, (name: string) => {
-            this.updateUploadPortListStatus(name);
-        });
     }
 
     private updateUploadPortListStatus(port: string) {

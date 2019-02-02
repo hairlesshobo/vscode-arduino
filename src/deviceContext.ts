@@ -37,7 +37,7 @@ export interface IDeviceContext {
     baudRate: number;
 
     /**
-         * Current selected Arduino board alias.
+     * Current selected Arduino board alias.
      * @property {string}
      */
     board: string;
@@ -267,7 +267,7 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
         this._port = value;
         this.saveContext();
     }
-    
+
     public get uploadPort() {
         return this._uploadPort;
     }
