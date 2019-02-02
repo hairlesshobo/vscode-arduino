@@ -13,6 +13,11 @@
             "type": "string",
             "minLength": 1
         },
+        "baudRate": {
+            "description": "Arduino serial monitor baud rate",
+            "type": "number",
+            "minLength": 1
+        },
         "board": {
             "description": "Arduino board type",
             "type": "string",
