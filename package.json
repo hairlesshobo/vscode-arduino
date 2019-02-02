@@ -39,6 +39,7 @@
     "onCommand:arduino.uploadUsingProgrammer",
     "onCommand:arduino.selectProgrammer",
     "onCommand:arduino.selectSerialPort",
+    "onCommand:arduino.selectUploadSerialPort",
     "onCommand:arduino.changeBaudRate",
     "onCommand:arduino.addLibPath",
     "onCommand:arduino.openSerialMonitor",
@@ -92,6 +93,10 @@
       {
         "command": "arduino.selectProgrammer",
         "title": "Arduino: Select Programmer"
+      },
+      {
+        "command": "arduino.selectUploadSerialPort",
+        "title": "Arduino: Select Upload Serial Port"
       },
       {
         "command": "arduino.selectSerialPort",

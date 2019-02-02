@@ -103,7 +103,7 @@ export class SerialMonitor implements vscode.Disposable {
         }
     }
 
-    public async selectSerialPort(vid: string, pid: string) {
+    public async selectSerialPortGeneric(vid: string, pid: string, callback: (portName: string) => any) {
         const lists = await SerialPortCtrl.list();
         if (!lists.length) {
             vscode.window.showInformationMessage("No serial port is available.");
@@ -122,7 +122,7 @@ export class SerialMonitor implements vscode.Disposable {
                 return false;
             });
             if (foundPort && !(this._serialPortCtrl && this._serialPortCtrl.isActive)) {
-                this.updatePortListStatus(foundPort.comName);
+                callback.call(this, foundPort.comName);
             }
         } else {
             const chosen = await vscode.window.showQuickPick(<vscode.QuickPickItem[]>lists.map((l: ISerialPortDetail): vscode.QuickPickItem => {
@@ -134,9 +134,15 @@ export class SerialMonitor implements vscode.Disposable {
                 return a.label === b.label ? 0 : (a.label > b.label ? 1 : -1);
             }), { placeHolder: "Select a serial port" });
             if (chosen && chosen.label) {
-                this.updatePortListStatus(chosen.label);
+                callback.call(this, chosen.label);
             }
         }
+    }
+
+    public async selectSerialPort(vid: string, pid: string) {
+        this.selectSerialPortGeneric(vid, pid, (name: string) => {
+            this.updatePortListStatus(name);
+        });
     }
 
     public async openSerialMonitor() {

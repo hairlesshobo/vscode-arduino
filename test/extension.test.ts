@@ -44,6 +44,7 @@ suite("Arduino: Extension Tests", () => {
                     "arduino.initialize",
                     "arduino.addLibPath",
                     "arduino.selectSerialPort",
+                    "arduino.selectUploadSerialPort",
                     "arduino.openSerialMonitor",
                     "arduino.changeBaudRate",
                     "arduino.changeEnding",
