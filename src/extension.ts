@@ -185,6 +185,7 @@ export async function activate(context: vscode.ExtensionContext) {
     }, () => {
         return { board: arduinoContextModule.default.boardManager.currentBoard.name };
     });
+    registerNonArduinoCommand("arduino.selectUploadSerialPort", () => ArduinoContext.arduinoApp.programmerManager.selectUploadSerialPort(null, null));
 
     registerArduinoCommand("arduino.selectProgrammer", async () => {
         if (!status.compile) {

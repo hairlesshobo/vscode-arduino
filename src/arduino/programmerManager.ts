@@ -4,6 +4,7 @@ import * as vscode from "vscode";
 import * as constants from "../common/constants";
 import * as util from "../common/util";
 import { DeviceContext } from "../deviceContext";
+import { SerialMonitor } from "../serialmonitor/serialMonitor";
 import { ArduinoApp } from "./arduino";
 import { IArduinoSettings } from "./arduinoSettings";
 
@@ -15,6 +16,8 @@ export class ProgrammerManager {
 
     private _programmerStatusBar: vscode.StatusBarItem;
 
+    private _uploadPortsStatusBar: vscode.StatusBarItem;
+
     private _programmers: Map<string, string>;
 
     constructor(private _settings: IArduinoSettings, private _arduinoApp: ArduinoApp) {
@@ -23,6 +26,12 @@ export class ProgrammerManager {
         this._programmerStatusBar.tooltip = "Select Programmer";
         this._programmerStatusBar.text = "<Select Programmer>";
         this._programmerStatusBar.show();
+
+        this._uploadPortsStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, constants.statusBarPriority.PROGRAMMER);
+        this._uploadPortsStatusBar.command = "arduino.selectUploadSerialPort";
+        this._uploadPortsStatusBar.tooltip = "Select Upload Port";
+        this._uploadPortsStatusBar.show();
+        this.updateUploadPortListStatus(null);
     }
 
     public get currentProgrammerID(): string {
@@ -37,6 +46,7 @@ export class ProgrammerManager {
         const dc = DeviceContext.getInstance();
         dc.onDidChange(() => {
             this.updateStatusBar();
+            this.updateUploadPortListStatus(null);
         });
     }
 
@@ -53,6 +63,14 @@ export class ProgrammerManager {
         this._programmerStatusBar.text = this._currentProgrammerName;
         const dc = DeviceContext.getInstance();
         dc.programmer = this._currentProgrammerName;
+    }
+
+    public async selectUploadSerialPort(vid: string, pid: string) {
+        const serialMonitor = SerialMonitor.getInstance();
+
+        serialMonitor.selectSerialPortGeneric(vid, pid, (name: string) => {
+            this.updateUploadPortListStatus(name);
+        });
     }
 
     private loadProgrammers() {
@@ -85,6 +103,19 @@ export class ProgrammerManager {
                 });
             }
         }));
+    }
+
+    private updateUploadPortListStatus(port: string) {
+        const dc = DeviceContext.getInstance();
+        if (port) {
+            dc.uploadPort = port;
+        }
+
+        if (dc.uploadPort) {
+            this._uploadPortsStatusBar.text = dc.uploadPort;
+        } else {
+            this._uploadPortsStatusBar.text = "<Select Upload Port>";
+        }
     }
 
     private updateStatusBar(show: boolean = true): void {

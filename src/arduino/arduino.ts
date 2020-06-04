@@ -114,7 +114,7 @@ export class ArduinoApp {
                 "Serial port is not specified. Do you want to select a serial port for uploading?",
                 "Yes", "No");
             if (choice === "Yes") {
-                vscode.commands.executeCommand("arduino.selectSerialPort");
+                vscode.commands.executeCommand("arduino.selectUploadSerialPort");
             }
             return;
         }
@@ -122,9 +122,12 @@ export class ArduinoApp {
         arduinoChannel.show();
         arduinoChannel.start(`Upload sketch - ${dc.sketch}`);
 
-        const serialMonitor = SerialMonitor.getInstance();
-
-        const needRestore = await serialMonitor.closeSerialMonitor(dc.port);
+        let serialMonitor;
+        let needRestore = false;
+        if (dc.port === dc.uploadPort) {
+            serialMonitor = SerialMonitor.getInstance();
+            needRestore = await serialMonitor.closeSerialMonitor(dc.port);
+        }
         UsbDetector.getInstance().pauseListening();
         await vscode.workspace.saveAll(false);
 
@@ -141,11 +144,7 @@ export class ArduinoApp {
         }
 
         const appPath = path.join(ArduinoWorkspace.rootPath, dc.sketch);
-        const args = ["--upload", "--board", boardDescriptor];
-        if (dc.port) {
-            args.push("--port", dc.port);
-        }
-        args.push(appPath);
+        const args = ["--upload", "--board", boardDescriptor, "--port", dc.uploadPort, appPath];
         if (VscodeSettings.getInstance().logLevel === "verbose") {
             args.push("--verbose");
         }
@@ -194,12 +193,12 @@ export class ArduinoApp {
         if (!dc.sketch || !util.fileExistsSync(path.join(ArduinoWorkspace.rootPath, dc.sketch))) {
             await this.getMainSketch(dc);
         }
-        if (!dc.port) {
+        if (!dc.uploadPort) {
             const choice = await vscode.window.showInformationMessage(
-                "Serial port is not specified. Do you want to select a serial port for uploading?",
+                "Upload serial port is not specified. Do you want to select a serial port for uploading with programmer?",
                 "Yes", "No");
             if (choice === "Yes") {
-                vscode.commands.executeCommand("arduino.selectSerialPort");
+                vscode.commands.executeCommand("arduino.selectUploadSerialPort");
             }
             return;
         }
@@ -207,15 +206,18 @@ export class ArduinoApp {
         arduinoChannel.show();
         arduinoChannel.start(`Upload sketch - ${dc.sketch}`);
 
-        const serialMonitor = SerialMonitor.getInstance();
-
-        const needRestore = await serialMonitor.closeSerialMonitor(dc.port);
+        let serialMonitor;
+        let needRestore = false;
+        if (dc.port === dc.uploadPort) {
+            serialMonitor = SerialMonitor.getInstance();
+            needRestore = await serialMonitor.closeSerialMonitor(dc.port);
+        }
         UsbDetector.getInstance().pauseListening();
         await vscode.workspace.saveAll(false);
 
         const appPath = path.join(ArduinoWorkspace.rootPath, dc.sketch);
-        const args = ["--upload", "--board", boardDescriptor, "--port", dc.port, "--useprogrammer",
-            "--pref", "programmer=" + selectProgrammer, appPath];
+        const args = ["--upload", "--board", boardDescriptor, "--port", dc.uploadPort, "--useprogrammer",
+                "--pref", "programmer=" + selectProgrammer, appPath];
         if (VscodeSettings.getInstance().logLevel === "verbose") {
             args.push("--verbose");
         }

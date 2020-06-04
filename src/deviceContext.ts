@@ -23,6 +23,14 @@ export interface IDeviceContext {
     port: string;
 
     /**
+     * Port used for uploading the skecth.
+     * It can be a COM port or an IP address (OTA)
+     * If undefined, it uses port value.
+     * @property {string}
+     */
+    uploadPort: string;
+
+    /**
      * COM Port baud rate for the serial monitor
      * @property {string}
      */
@@ -81,6 +89,8 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
     private _port: string;
 
     private _baudRate: number;
+
+    private _uploadPort: string;
 
     private _board: string;
 
@@ -154,6 +164,7 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
                     deviceConfigJson = util.tryParseJSON(fs.readFileSync(configFile.fsPath, "utf8"));
                     if (deviceConfigJson) {
                         this._port = deviceConfigJson.port;
+                        this._uploadPort = deviceConfigJson.uploadPort || deviceConfigJson.port;
                         this._baudRate = deviceConfigJson.baudRate;
                         this._board = deviceConfigJson.board;
                         this._sketch = deviceConfigJson.sketch;
@@ -168,6 +179,7 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
                     }
                 } else {
                     this._port = null;
+                    this._uploadPort = null;
                     this._baudRate = null;
                     this._board = null;
                     this._sketch = null;
@@ -187,6 +199,7 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
 
                  // Workaround for change in API, populate required props for arduino.json
                 this._port = null;
+                this._uploadPort = null;
                 this._baudRate = null;
                 this._board = null;
                 this._sketch = null;
@@ -225,6 +238,7 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
         }
         deviceConfigJson.sketch = this.sketch;
         deviceConfigJson.port = this.port;
+        deviceConfigJson.uploadPort = this.uploadPort;
         deviceConfigJson.baudRate = this.baudRate;
         deviceConfigJson.board = this.board;
         deviceConfigJson.output = this.output;
@@ -251,6 +265,15 @@ export class DeviceContext implements IDeviceContext, vscode.Disposable {
 
     public set port(value: string) {
         this._port = value;
+        this.saveContext();
+    }
+
+    public get uploadPort() {
+        return this._uploadPort;
+    }
+
+    public set uploadPort(value: string) {
+        this._uploadPort = value;
         this.saveContext();
     }
 
