@@ -5,7 +5,7 @@ import * as os from "os";
 import { OutputChannel } from "vscode";
 import { VscodeSettings } from "../arduino/vscodeSettings";
 
-interface ISerialPortDetail {
+export interface ISerialPortDetail {
   path: string;
   manufacturer: string;
   vendorId: string;
