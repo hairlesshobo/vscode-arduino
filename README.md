@@ -18,7 +18,7 @@ Welcome to the Visual Studio Code extension for **Arduino** <sup>preview</sup> !
 ## Prerequisites
 The Arduino IDE is required. Please install it from the [download page](https://www.arduino.cc/en/main/software#download).
 - *Note:* Arduino IDE `1.8.7` has some breaking changes, causing board package and library installation failures. It is recommended to that you install version `1.8.6` or `1.8.8`
-- The supported Arduino IDE versions are `1.6.x` and later are supported.
+- The supported Arduino IDE versions are `1.6.x` and later.
 - The Windows Store's version of the Arduino IDE is not supported because of the sandbox environment that the application runs in.
 
 ## Installation
@@ -32,7 +32,7 @@ ext install vscode-arduino
 You can also install directly from the Marketplace within Visual Studio Code, searching for `Arduino`.
 
 ## Get Started
-You can find code samples and tutorials each time that you connect a supported device. Alternatively you can visit our [IoT Developer Blog Space](https://aka.ms/iotdevblog) or [Get Started Tutorials](https://docs.microsoft.com/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-get-started).
+You can find code samples and tutorials each time that you connect a supported device. Alternatively you can visit our [IoT Developer Blog Space](https://devblogs.microsoft.com/iotdev/) or [Get Started Tutorials](https://docs.microsoft.com/azure/iot-hub/iot-hub-arduino-iot-devkit-az3166-get-started).
 
 ## Commands
 This extension provides several commands in the Command Palette (<kbd>F1</kbd> or <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>P</kbd>) for working with `*.ino` files:
@@ -62,6 +62,7 @@ This extension provides several commands in the Command Palette (<kbd>F1</kbd> o
 | `arduino.commandPath` | Path to an executable (or script) relative to `arduino.path`. The default value is `arduino_debug.exe` for windows,`Contents/MacOS/Arduino` for Mac and `arduino` for Linux, You also can use a custom launch script to run Arduino by modifying this setting. (Requires a restart after change) Example: `run-arduino.bat` for Windows, `Contents/MacOS/run-arduino.sh` for Mac and `bin/run-arduino.sh` for Linux. |
 | `arduino.additionalUrls` | Additional Boards Manager URLs for 3rd party packages. You can have multiple URLs in one string with a comma(`,`) as separator, or have a string array. The default value is empty. |
 | `arduino.logLevel` | CLI output log level. Could be info or verbose. The default value is `"info"`. |
+| `arduino.allowPDEFiletype` | Allow the VSCode Arduino extension to open .pde files from pre-1.0.0 versions of Ardiuno. Note that this will break Processing code. Default value is `false`. | 
 | `arduino.enableUSBDetection` | Enable/disable USB detection from the VSCode Arduino extension. The default value is `true`. When your device is plugged in to your computer, it will pop up a message "`Detected board ****, Would you like to switch to this board type`". After clicking the `Yes` button, it will automatically detect which serial port (COM) is connected a USB device. If your device does not support this feature, please provide us with the PID/VID of your device; the code format is defined in `misc/usbmapping.json`.To learn more about how to list the vid/pid, use the following tools: https://github.com/EmergingTechnologyAdvisors/node-serialport `npm install -g serialport` `serialport-list -f jsonline`|
 | `arduino.disableTestingOpen` | Enable/disable automatic sending of a test message to the serial port for checking the open status. The default value is `false` (a test message will be sent). |
 | `arduino.skipHeaderProvider` | Enable/disable the extension providing completion items for headers. This functionality is included in newer versions of the C++ extension. The default value is `false`.|
@@ -74,6 +75,7 @@ The following Visual Studio Code settings are available for the Arduino extensio
     "arduino.path": "C:/Program Files (x86)/Arduino",
     "arduino.commandPath": "arduino_debug.exe",
     "arduino.logLevel": "info",
+    "arduino.allowPDEFiletype": false, 
     "arduino.enableUSBDetection": true,
     "arduino.disableTestingOpen": false,
     "arduino.skipHeaderProvider": false,
@@ -102,7 +104,7 @@ The following settings are as per sketch settings of the Arduino extension. You 
 - `sketch` - The main sketch file name of Arduino.
 - `port` - Name of the serial port connected to the device. Can be set by the `Arduino: Select Serial Port` command. For Mac users could be "/dev/cu.wchusbserial1420".
 - `board` - Currently selected Arduino board alias. Can be set by the `Arduino: Change Board Type` command. Also, you can find the board list there.
-- `output` - Arduino build output path. If not set, Arduino will create a new temporary output folder each time, which means it cannot reuse the intermediate result of the previous build leading to long verify/upload time, so it is recommended to set the field. Arduino requires that the output path should not be the workspace itself or in a subfolder of the workspace, otherwise, it may not work correctly. By default, this option is not set.
+- `output` - Arduino build output path. If not set, Arduino will create a new temporary output folder each time, which means it cannot reuse the intermediate result of the previous build leading to long verify/upload time, so it is recommended to set the field. Arduino requires that the output path should not be the workspace itself or in a subfolder of the workspace, otherwise, it may not work correctly. By default, this option is not set. It's worth noting that the contents of this file could be deleted during the build process, so pick (or create) a directory that will not store files you want to keep.
 - `debugger` - The short name of the debugger that will be used when the board itself does not have a debugger and there is more than one debugger available. You can find the list of debuggers [here](https://github.com/Microsoft/vscode-arduino/blob/master/misc/debuggerUsbMapping.json). By default, this option is not set.
 - `prebuild` - External command before building the sketch file. You should only set one `prebuild` command. `command1 && command2` does not work. If you need to run multiple commands before the build, then create a script.
 
