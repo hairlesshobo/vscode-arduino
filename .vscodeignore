@@ -11,3 +11,8 @@ tslint.json
 .travis.yml
 gulpfile.js
 *.vsix
+.github/**
+*.log
+webpack.config.js
+node_modules/**
+vendor/**

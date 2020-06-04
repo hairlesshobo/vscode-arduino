@@ -47,7 +47,6 @@ suite("Arduino: Extension Tests", () => {
                     "arduino.selectUploadSerialPort",
                     "arduino.openSerialMonitor",
                     "arduino.changeBaudRate",
-                    "arduino.changeEnding",
                     "arduino.sendMessageToSerialPort",
                     "arduino.closeSerialMonitor",
                     "arduino.reloadExample",
@@ -70,7 +69,7 @@ suite("Arduino: Extension Tests", () => {
         // When running test on osx, the vscode instance is hanging there after tests finished and cause mocha timeout.
         // As a workaround, closing usb-detection process manually would make test window exit normally.
         if (os.platform() !== "linux") {
-            const usbDector = require("../../vendor/node-usb-native").detector;
+            const usbDector = require("node-usb-native").detector;
             usbDector.stopMonitoring();
         }
     });

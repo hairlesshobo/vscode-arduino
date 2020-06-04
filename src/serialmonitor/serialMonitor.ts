@@ -70,7 +70,14 @@ export class SerialMonitor implements vscode.Disposable {
     }
 
     public initialize() {
-        this._defaultBaudRate = ArduinoContext.arduinoApp.settings.defaultBaudRate || SerialMonitor.DEFAULT_BAUD_RATE;
+        let defaultBaudRate;
+        if (ArduinoContext.arduinoApp && ArduinoContext.arduinoApp.settings && ArduinoContext.arduinoApp.settings.defaultBaudRate) {
+            defaultBaudRate = ArduinoContext.arduinoApp.settings.defaultBaudRate;
+        } else {
+            defaultBaudRate = SerialMonitor.DEFAULT_BAUD_RATE;
+        }
+      
+        this._defaultBaudRate = defaultBaudRate;
         this._outputChannel = vscode.window.createOutputChannel(SerialMonitor.SERIAL_MONITOR);
         this._currentBaudRate = this._defaultBaudRate;
         this._portsStatusBar = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right, constants.statusBarPriority.PORT);

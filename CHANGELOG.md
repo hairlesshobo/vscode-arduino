@@ -1,17 +1,81 @@
 # Change Log
 All notable changes to this project will be documented in this file.
 
+## Version 0.3.0
+
+- Release date: March 26, 2020
+
+### Fixed
+
+- Support Electron v7. Fix issue of "Unable to use serial port in VS Code Version 1.43.0". [[#980](https://github.com/microsoft/vscode-arduino/issues/980)]
+- Fix issue of "Fail to debug on Ubuntu". [[#933](https://github.com/microsoft/vscode-arduino/issues/933)]
+- Remove line ending selection. Fix the issue of "Save the last used end of line". [[#952](https://github.com/microsoft/vscode-arduino/issues/952)]
+- Fix the issue of "Can't install libraries from VS Code for ESP8266". [[#930](https://github.com/microsoft/vscode-arduino/issues/930)]
+- Fix the issue of "Project path can not be changed". [[#978](https://github.com/microsoft/vscode-arduino/issues/978)]
+
+Special thanks to [raomin](https://github.com/raomin), thanks for your contributions and feedbacks.
+
+## Version 0.2.29
+
+- Release date: January 2, 2020
+
+### Changed
+- Dependency upgrade
+
+## Version 0.2.28
+
+- Release data: November 15, 2019
+
+### Fixed
+
+- Optimize activation time  of Arduino Extension.
+- Bump mixin-deep from 1.3.1 to 1.3.2.
+- Remove Processing Filetype (.PDE extension).
+- Fix the issue of "Unable to select serial port" [[#918]](https://github.com/microsoft/vscode-arduino/issues/918)
+- Fix Travis CI build failure [[#900]](https://github.com/microsoft/vscode-arduino/issues/900)
+- Fix issue of "Exit with code=undefined" [[#869]](https://github.com/microsoft/vscode-arduino/issues/869)
+- Fix issue of "spawn: Use explicit chcp.com" [[#910]](https://github.com/microsoft/vscode-arduino/pull/910)
+- Fix wording & typos.
+
+Special thanks to [Peter Wone](https://github.com/PeterWone), [Dre West](https://github.com/Dotrar),[Lucas Schneider](https://github.com/schneider8357) for your contributions and feedbacks.
+
+## Version 0.2.27
+
+- Release date: July 8, 2019
+
+### Fixed
+- Fix the issue of "Unable to start serial monitor" [#851](https://github.com/microsoft/vscode-arduino/issues/851) which started after update to VS Code 1.36.0.
+
+Special thanks to [Aboulfad](https://github.com/aboulfad), [szormok](https://github.com/szormok), [MichaelPfezer](https://github.com/MichaelPfezer), [CodeNameHawk](https://github.com/CodeNameHawk), [Rafu](https://github.com/rafalp9728) and [Cube-Line](https://github.com/Cube-Line), thanks for your contributions and feedbacks.
+
+## Version 0.2.26
+
+- Release date: May 30, 2019
+
+### Added
+- Add .pde support
+
+### Changed
+- The value of 'Include Path' will be updated automatically when board package is updated
+
+### Fixed
+- Fix the issue of "ST-Link upload - Please specify the upload serial port" [#595](https://github.com/microsoft/vscode-arduino/issues/595)
+
+Special thanks to [Riz-waan](https://github.com/Riz-waan), [LuisAbrantes](https://github.com/LuisAbrantes), [Christopher Schmitz](https://github.com/chris-schmitz), [Christian](https://github.com/ChriD) and [LMtx](https://github.com/LMtx), thanks for your contributions and feedbacks.
+
 ## Version 0.2.25
--Release date: January 10, 2019
+
+- Release date: January 10, 2019
 
 ### Added
 - Add upload and verify button in action bar [#737](https://github.com/Microsoft/vscode-arduino/pull/737)
 - Add serial port support for Electron 3.0 [#729](https://github.com/Microsoft/vscode-arduino/pull/729), [#730](https://github.com/Microsoft/vscode-arduino/pull/730), [#731](https://github.com/Microsoft/vscode-arduino/pull/731)
 
-Special thanks to [Michael Omiccioli](https://github.com/momiccioli) and [MarNwk](https://github.com/MarNwk),thank you for your feedbacks.
+Special thanks to [Michael Omiccioli](https://github.com/momiccioli) and [MarNwk](https://github.com/MarNwk), thank you for your feedbacks.
 
 ## Version 0.2.24
--Release date: December 11, 2018
+
+- Release date: December 11, 2018
 
 ### Added
 - Add debugging support for cmsis-dap with Keil Software vid [#634](https://github.com/Microsoft/vscode-arduino/pull/634)
@@ -26,7 +90,8 @@ Special thanks to [Michael Omiccioli](https://github.com/momiccioli) and [MarNwk
 Special thanks to [Deqing Sun](https://github.com/DeqingSun), thank you for your contributions and feedbacks.
 
 ## Version 0.2.23
--Release date: November 22, 2018
+
+- Release date: November 22, 2018
 
 ### Added
 - Add debugging support for uno [#685](https://github.com/Microsoft/vscode-arduino/pull/685)
@@ -45,6 +110,7 @@ Special thanks to [Deqing Sun](https://github.com/DeqingSun), thank you for your
 Special thanks to [Deqing Sun](https://github.com/DeqingSun), [Takashi Matsuoka](https://github.com/matsujirushi), [Chinmay Chandak](https://github.com/CCAtAlvis), [aster94](https://github.com/aster94), [Ajit Panigrahi](https://github.com/AjitZero) and [Konrad Blum](https://github.com/kblum), thank you for your contributions and feedbacks.
 
 ## Version 0.2.22
+
 - Release date: October 18, 2018
 
 ### Added
@@ -60,6 +126,7 @@ Special thanks to [Deqing Sun](https://github.com/DeqingSun), [Takashi Matsuoka]
 Special thanks to [aster94](https://github.com/aster94), [Niels van der Veer](https://github.com/n9iels), [AntoineGirafe](https://github.com/AntoineGirafe), thank you foryour contributions and feedbacks.
 
 ## Version 0.2.20
+
 - Release date: August 16, 2018
 
 ### Changed
@@ -67,12 +134,14 @@ Special thanks to [aster94](https://github.com/aster94), [Niels van der Veer](ht
 - Pop up a message to help the user figure out what settings are wrong [#611](https://github.com/Microsoft/vscode-arduino/issues/611)
 
 ## Version 0.2.19
+
 - Release date: July 31, 2018
 
 ### Changed
 - Dependency upgrade
 
 ## Version 0.2.18
+
 - Release date: July 17, 2018
 
 ### Added
@@ -86,6 +155,7 @@ Special thanks to [aster94](https://github.com/aster94), [Niels van der Veer](ht
 Special thanks to [Takashi Matsuoka](https://github.com/matsujirushi), [Andrew Churchill](https://github.com/xxaxdxcxx), [Pharap](https://github.com/Pharap), thank you for your contributions and feedbacks.
 
 ## Version 0.2.17
+
 - Release date: June 15, 2018
 
 ### Fixed
@@ -94,6 +164,7 @@ Special thanks to [Takashi Matsuoka](https://github.com/matsujirushi), [Andrew C
 - Fix g++ not find issue when upgrade the board sdk to a new version [#586](https://github.com/Microsoft/vscode-arduino/issues/586)
 
 ## Version 0.2.16
+
 - Release date: June 6, 2018
 
 ### Added
@@ -106,6 +177,7 @@ Special thanks to [Takashi Matsuoka](https://github.com/matsujirushi), [Andrew C
 Special thanks to [Thad House](https://github.com/ThadHouse), [Carlos Gomez](https://github.com/Kurolox), [Johannes Henninger](https://github.com/jhenninger), thank you for your contributions and feedbacks.
 
 ## Version 0.2.15
+
 - Release date: May 14, 2018
 
 ### Added
@@ -122,12 +194,14 @@ Special thanks to [Thad House](https://github.com/ThadHouse), [Carlos Gomez](htt
 Special thanks to [Joel Santos](https://github.com/mundodisco8), [John](https://github.com/VashJuan), [mybayern1974](https://github.com/mybayern1974), [Maxime Paquatte](https://github.com/maxime-paquatte), [Joe Saavedra](https://github.com/jmsaavedra), [Kye Burchard](https://github.com/kyeb), [Laurent Haas - F6FVY](https://github.com/f6fvy), thank you for your feedbacks.
 
 ## Version 0.2.14
+
 - Release date: May 4, 2018
 
 ### Fixed
 - Fix install board command issue
 
 ## Version 0.2.13
+
 - Release date: April 26, 2018
 
 ### Fixed
@@ -140,6 +214,7 @@ Special thanks to [Joel Santos](https://github.com/mundodisco8), [John](https://
 - Disable auto popup get started page for IoT Devkit
 
 ## Version 0.2.12
+
 - Release date: April 8, 2018
 
 ### Fixed
@@ -153,6 +228,7 @@ Special thanks to [Joel Santos](https://github.com/mundodisco8), [John](https://
 Special thanks to [Felix Uhl](https://github.com/iFreilicht), [emontnemery](https://github.com/emontnemery), [tsalinger](https://github.com/tsalinger), [Diego Medeiros](https://github.com/Medeirox), [vphuoc](https://github.com/vphuoc), [Nuno Sousa](https://github.com/nuno407), thank you for your feedbacks.
 
 ## Version 0.2.11
+
 - Release date: March 7, 2018
 
 ### Fixed
@@ -161,6 +237,7 @@ Special thanks to [Felix Uhl](https://github.com/iFreilicht), [emontnemery](http
 Special thanks to [GarethE](https://github.com/keyoke), thank you for your contributions and feedbacks.
 
 ## Version 0.2.10
+
 - Release date: October 27, 2017
 
 ### Changed
@@ -168,18 +245,21 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
 - Popup the example view when detecting new device is connected [#431](https://github.com/Microsoft/vscode-arduino/pull/431)
 
 ## Version 0.2.8
+
 - Release date: October 10, 2017
 
 ### Changed
 - Thanks to [Matthew Simms](https://github.com/brndmg) that fixes the regression from the usage react-select control in the [PR#421](https://github.com/Microsoft/vscode-arduino/pull/421)
 
 ## Version 0.2.7
+
 - Release date: September 29, 2017
 
 ### Changed
 - Default baud rate from 9600 to 115200
 
 ## Version 0.2.6
+
 - Release date: September 1, 2017
 
 ### Added
@@ -189,6 +269,7 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
 - Fix html/md preview issue
 
 ## Version 0.2.5
+
 - Release date: August 24, 2017
 
 ### Added 
@@ -206,6 +287,7 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
     - [Atalanttore](https://github.com/Microsoft/vscode-arduino/pull/381), 
 
 ## Version 0.2.4
+
 - Release date: July 3, 2017
 
 ### Added
@@ -216,6 +298,7 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
 - The extension is ready for opening issue on github
 
 ## Version 0.2.3
+
 - Release date: May 27, 2017
 
 ### Changed
@@ -226,6 +309,7 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
 - Fix issue #289 #324 #327
 
 ## Version 0.2.2
+
 - Release date: May 19, 2017
 
 ### Added
@@ -233,6 +317,7 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
 - Support debug for stlink, jlink
 
 ## Version 0.1.3
+
 - Release date: May 12, 2017
 
 ### Added
@@ -249,6 +334,7 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
 
 
 ## Version 0.1.2
+
 - Release date: April 28, 2017
 
 ### Added
@@ -272,9 +358,11 @@ Special thanks to [GarethE](https://github.com/keyoke), thank you for your contr
 - Avoid verify/upload reentry issue
 
 ## Version 0.1.1
+
 - HotFix: Update display tag. 
 
 ## Version 0.1.0
+
 - Release date: April 14, 2017
 - Release status: Public Preview
 
